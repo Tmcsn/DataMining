@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import Binarizer
 def drop_multi_col(col_names,df):
     '''
     AIM: drop cols by names
@@ -72,6 +73,13 @@ def totalDescribe(df):
     stats_df.sort_values('Unique_values', ascending=False)
     return stats_df
 
+def changeCountToBinary(df,colName):
 
+
+    transformer = Binarizer(threshold=0.0).fit(df[colName].values)
+
+    pd_watched = transformer.transform(df[colName].values)
+
+    df[colName] = pd_watched
 if __name__=="__main__":
     pass
